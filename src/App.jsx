@@ -9,50 +9,69 @@ import { FaSyncAlt, FaMoon, FaSun } from 'react-icons/fa';
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  const { 
-    currentWeather, 
-    loading, 
-    error, 
-    fetchWeather, 
-    refetchCurrentCity, 
-    recentSearches 
+  const {
+    currentWeather,
+    loading,
+    error,
+    fetchWeather,
+    refetchCurrentCity,
+    recentSearches
   } = useWeather();
 
   const toggleDarkMode = () => {
-    setDarkMode(prev => !prev);
+    setDarkMode((prev) => !prev);
   };
 
   return (
-    <div className={`min-h-screen ${darkMode ? 'bg-gray-900 text-white' : 'bg-gray-100 text-gray-900'} transition-colors duration-300`}>
-      <div className="container mx-auto px-4 py-8">
-        <header className="mb-8">
-          <div className="flex justify-between items-center mb-6">
-            <h1 className="text-3xl font-bold">Weather Dashboard</h1>
-            <button
-              onClick={toggleDarkMode}
-              className={`p-2 rounded-full ${darkMode ? 'bg-gray-800 text-yellow-300' : 'bg-gray-200 text-gray-800'}`}
-            >
-              {darkMode ? <FaSun /> : <FaMoon />}
-            </button>
-          </div>
-          <SearchBar onSearch={fetchWeather} />
-          <RecentSearches searches={recentSearches} onSelect={fetchWeather} />
+    <div
+      className={`min-h-screen transition-colors duration-300 ${
+        darkMode ? 'bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white' : 'bg-gradient-to-br from-blue-100 via-white to-blue-200 text-gray-900'
+      }`}
+    >
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Header */}
+        <header className="flex justify-between items-center mb-8">
+          <h1 className="text-4xl font-extrabold tracking-tight text-center sm:text-left">
+            🌤 Weather Dashboard
+          </h1>
+
+          <button
+            onClick={toggleDarkMode}
+            className={`p-3 rounded-full shadow-lg transition-colors duration-200 ${
+              darkMode
+                ? 'bg-gray-700 text-yellow-400 hover:bg-gray-600'
+                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+            }`}
+            title="Toggle Dark/Light Mode"
+          >
+            {darkMode ? <FaSun /> : <FaMoon />}
+          </button>
         </header>
 
+        {/* Search */}
+        <div className="mb-6">
+          <SearchBar onSearch={fetchWeather} />
+          <RecentSearches searches={recentSearches} onSelect={fetchWeather} />
+        </div>
+
+        {/* Main Section */}
         <main>
           {loading && <LoadingSpinner />}
-          
+
           {error && <ErrorMessage message={error} />}
-          
+
           {currentWeather && !loading && (
             <div className="relative">
+              {/* Refresh Button */}
               <button
                 onClick={refetchCurrentCity}
-                className="absolute -top-10 right-0 p-2 text-blue-500 hover:text-blue-700 transition-colors"
-                title="Refresh weather data"
+                title="Refresh Weather"
+                className="absolute right-0 -top-12 text-xl text-blue-600 dark:text-yellow-300 hover:scale-110 transition-transform"
               >
                 <FaSyncAlt />
               </button>
+
+              {/* Weather Info */}
               <WeatherCard data={currentWeather} />
             </div>
           )}
