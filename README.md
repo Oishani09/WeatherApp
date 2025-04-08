@@ -61,4 +61,4 @@ Note: You need to sign up for a free API key at [OpenWeatherMap](https://openwea
 
 ## Deployment
 
-This app is deployed on [Vercel/Netlify/GitHub Pages] at [your-deployed-url].
+This app is deployed on Vercel
