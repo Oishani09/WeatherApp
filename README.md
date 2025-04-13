@@ -2,6 +2,8 @@
 
 A responsive weather dashboard that displays current weather information for any city using the OpenWeatherMap API.
 
+live demo - https://weather-app-sigma-pink-74.vercel.app/
+
 ## Tech Stack
 
 - React.js (Vite)
